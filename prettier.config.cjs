@@ -4,8 +4,7 @@ const config = {
   semi: false,
   singleQuote: true,
   jsxSingleQuote: true,
-  pluginSearchDirs: false,
-  plugins: [require.resolve("prettier-plugin-tailwindcss")],
-};
+  plugins: [require.resolve('prettier-plugin-tailwindcss')],
+}
 
-module.exports = config;
+module.exports = config
