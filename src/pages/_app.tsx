@@ -1,9 +1,24 @@
-import { type AppType } from "next/dist/shared/lib/utils";
+import { ClerkProvider } from '@clerk/nextjs'
+import { NextUIProvider } from '@nextui-org/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { type AppType } from 'next/dist/shared/lib/utils'
+import { Layout } from '~/components/Layout'
+import '~/styles/globals.css'
 
-import "~/styles/globals.css";
+const queryClient = new QueryClient()
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
-};
+  return (
+    <ClerkProvider>
+      <QueryClientProvider client={queryClient}>
+        <NextUIProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </NextUIProvider>
+      </QueryClientProvider>
+    </ClerkProvider>
+  )
+}
 
-export default MyApp;
+export default MyApp
