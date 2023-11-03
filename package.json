@@ -1,9 +1,6 @@
 {
   "name": "reddit-clone",
   "version": "0.1.0",
-  "engines": {
-    "node": ">=18.12.0"
-  },
   "private": true,
   "scripts": {
     "build": "next build",
@@ -13,9 +10,11 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.26.2",
+    "@nextui-org/react": "^2.1.13",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tanstack/react-query": "^5.4.3",
     "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
     "next": "^14.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -23,6 +22,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.1",
     "@types/eslint": "^8.44.6",
     "@types/node": "^20.8.10",
     "@types/react": "^18.2.34",
