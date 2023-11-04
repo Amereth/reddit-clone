@@ -9,12 +9,12 @@ export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div
       className={cn(
-        'dark text-foreground bg-background flex-col',
+        'flex min-h-[100vh] flex-col bg-background text-foreground dark',
         raleway.className,
       )}
     >
       <Header />
-      <main>{children}</main>
+      <main className='flex-1 px-4 py-8'>{children}</main>
     </div>
   )
 }
