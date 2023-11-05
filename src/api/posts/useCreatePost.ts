@@ -4,13 +4,13 @@ import {
   useQueryClient,
 } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useAuthenticatedFetch } from '~/hooks/useFetch'
+import { useAuthenticatedFetch } from '~/hooks/useAuthenticatedFetch'
 import { type SuccessResponse, type Post } from '~/types'
 
 export type CreatePostPayload = Post
 
 export const useCreatePost = (
-  props?: MutationOptions<SuccessResponse, Error, Post, unknown>,
+  props?: MutationOptions<SuccessResponse, Error, CreatePostPayload, unknown>,
 ) => {
   const fetch = useAuthenticatedFetch()
   const client = useQueryClient()
@@ -19,7 +19,7 @@ export const useCreatePost = (
     ...props,
 
     mutationFn: async (values: CreatePostPayload) =>
-      fetch('http://localhost:8080/posts', {
+      fetch('/posts', {
         method: 'POST',
         body: JSON.stringify(values),
       }).then((r) => r.json() as Promise<SuccessResponse>),

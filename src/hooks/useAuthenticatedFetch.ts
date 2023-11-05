@@ -1,14 +1,12 @@
 import { useAuth } from '@clerk/nextjs'
 
 const methodsWithBody = ['POST', 'PUT', 'PATCH']
+const apiUrl = 'http://localhost:8080'
 
 export const useAuthenticatedFetch = () => {
   const { getToken } = useAuth()
 
-  return async (
-    input: RequestInfo | URL,
-    init: RequestInit | undefined = {},
-  ) => {
+  return async (input: string, init: RequestInit | undefined = {}) => {
     const headers = init?.headers ?? {}
 
     const contentType = methodsWithBody.includes(init.method ?? 'GET')
@@ -24,6 +22,6 @@ export const useAuthenticatedFetch = () => {
       },
     }
 
-    return fetch(input, modifiedInit)
+    return fetch(apiUrl + input, modifiedInit)
   }
 }
