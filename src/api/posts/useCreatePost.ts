@@ -26,9 +26,9 @@ export const useCreatePost = (
 
     onSuccess(data, variables, context) {
       toast.success('post created successfully')
-      props?.onSuccess?.(data, variables, context)
-
       void client.invalidateQueries({ queryKey: ['posts'] })
+
+      props?.onSuccess?.(data, variables, context)
     },
   })
 }
