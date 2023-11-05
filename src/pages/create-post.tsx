@@ -11,7 +11,7 @@ import {
 
 type FormValues = CreatePostPayload
 
-export default function CreatePost() {
+export default function CreatePostPage() {
   const router = useRouter()
 
   const { mutate, isPending } = useCreatePost({
@@ -57,7 +57,6 @@ export default function CreatePost() {
               message: 'post title should be at least 3 characters long',
             },
           })}
-          isRequired
         />
 
         <Textarea
@@ -108,14 +107,25 @@ export default function CreatePost() {
           ))}
         </div>
 
-        <Button
-          size='lg'
-          type='submit'
-          className='mt-8 w-min'
-          isLoading={isPending}
-        >
-          submit
-        </Button>
+        <div className='mt-8 flex gap-10'>
+          <Button
+            size='lg'
+            type='reset'
+            variant='bordered'
+            onClick={() => router.push('/')}
+          >
+            cancel
+          </Button>
+          <Button
+            size='lg'
+            type='submit'
+            className='w-min'
+            isLoading={isPending}
+          >
+            submit
+          </Button>
+        </div>
+
         <DevTool control={control} />
       </form>
     </div>

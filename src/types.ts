@@ -1,4 +1,10 @@
-export type Post = {
+export type Entity = {
+  id: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type Post = Entity & {
   title: string
   body: string
   hashtags: string[]
