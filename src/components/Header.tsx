@@ -1,5 +1,6 @@
 import { SignIn, SignInButton, useUser, UserButton } from '@clerk/nextjs'
 import { Button } from '@nextui-org/react'
+import Link from 'next/link'
 
 export const Header = () => {
   const { isSignedIn } = useUser()
@@ -7,14 +8,16 @@ export const Header = () => {
 
   return (
     <>
-      <header className='h-16 border-b-1 flex items-center px-4'>
-        <Button className='mr-auto'>Create Post</Button>
+      <header className='flex h-16 items-center border-b-1 px-4'>
+        <Link className='mr-auto' href='/create-post'>
+          <Button>create post</Button>
+        </Link>
 
         {isSignedIn && <UserButton />}
 
         {isNotSignedIn && (
           <SignInButton>
-            <button className='button'>Login</button>
+            <button className='button'>login</button>
           </SignInButton>
         )}
       </header>

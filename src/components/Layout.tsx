@@ -1,6 +1,6 @@
-import { cn } from 'lib/cn'
 import { Raleway } from 'next/font/google'
 import { type PropsWithChildren } from 'react'
+import { cn } from '~/utils/cn'
 import { Header } from './Header'
 
 const raleway = Raleway({ subsets: ['latin'] })
