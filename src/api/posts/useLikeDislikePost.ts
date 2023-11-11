@@ -3,16 +3,21 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query'
-import { toast } from 'sonner'
 import { useAuthenticatedFetch } from '~/hooks/useAuthenticatedFetch'
 import { type WithSuccessResponse, type Post } from '~/types'
 
-export type CreatePostPayload = Post
+type LikeDislikePostPayload = {
+  action: 'like' | 'dislike'
+  postId: Post['id']
+}
 
-type SuccessResponse = WithSuccessResponse<{ insertedId: string }>
-
-export const useCreatePost = (
-  props?: MutationOptions<SuccessResponse, Error, CreatePostPayload, unknown>,
+export const useLikeDislikePost = (
+  props?: MutationOptions<
+    WithSuccessResponse,
+    Error,
+    LikeDislikePostPayload,
+    unknown
+  >,
 ) => {
   const fetch = useAuthenticatedFetch()
   const client = useQueryClient()
@@ -20,14 +25,12 @@ export const useCreatePost = (
   return useMutation({
     ...props,
 
-    mutationFn: async (values: CreatePostPayload) =>
-      fetch('/posts', {
-        method: 'POST',
-        body: JSON.stringify(values),
-      }).then((r) => r.json() as Promise<SuccessResponse>),
+    mutationFn: async ({ action, postId }: LikeDislikePostPayload) =>
+      fetch(`/posts/${postId}/${action}`, {
+        method: 'PUT',
+      }).then((r) => r.json() as Promise<WithSuccessResponse>),
 
     onSuccess(data, variables, context) {
-      toast.success('post created successfully')
       void client.invalidateQueries({ queryKey: ['posts'] })
 
       props?.onSuccess?.(data, variables, context)

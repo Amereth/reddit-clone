@@ -4,20 +4,23 @@ import Link from 'next/link'
 
 export const Header = () => {
   const { isSignedIn } = useUser()
-  const isNotSignedIn = !isSignedIn
 
   return (
     <>
       <header className='flex h-16 items-center border-b-1 px-4'>
-        <Link className='mr-auto' href='/create-post'>
-          <Button>create post</Button>
-        </Link>
+        {isSignedIn && (
+          <>
+            <Link className='mr-auto' href='/create-post'>
+              <Button>create post</Button>
+            </Link>
 
-        {isSignedIn && <UserButton />}
+            <UserButton />
+          </>
+        )}
 
-        {isNotSignedIn && (
+        {!isSignedIn && (
           <SignInButton>
-            <button className='button'>login</button>
+            <button className='ml-auto'>login</button>
           </SignInButton>
         )}
       </header>
