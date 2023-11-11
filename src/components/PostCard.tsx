@@ -24,10 +24,12 @@ export const PostCard = ({ post }: PostCardProps) => {
       <div className='relative flex h-full flex-col gap-4 rounded-xl p-4'>
         <div className='flex flex-col gap-4'>
           <header className='flex items-center gap-4'>
-            <Avatar
-              src={post.author.imageUrl ?? ''}
-              className='min-w-min shrink-0 self-start'
-            />
+            {post.author.imageUrl && (
+              <Avatar
+                src={post.author.imageUrl}
+                className='min-w-min shrink-0 self-start'
+              />
+            )}
             <h2 className='line-clamp-2'>{post.title}</h2>
           </header>
         </div>
