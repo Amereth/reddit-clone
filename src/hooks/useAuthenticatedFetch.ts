@@ -3,7 +3,11 @@ import { useAuth } from '@clerk/nextjs'
 const methodsWithBody = ['POST', 'PUT', 'PATCH']
 const apiUrl = 'http://localhost:8080'
 
-export const useAuthenticatedFetch = () => {
+type ErrorResponse = {
+  message: string
+}
+
+export const useAuthenticatedFetch = <TData>() => {
   const { getToken } = useAuth()
 
   return async (input: string, init: RequestInit | undefined = {}) => {
@@ -22,6 +26,14 @@ export const useAuthenticatedFetch = () => {
       },
     }
 
-    return fetch(apiUrl + input, modifiedInit)
+    return fetch(apiUrl + input, modifiedInit).then(async (response) => {
+      const data = (await response.json()) as TData | ErrorResponse
+
+      if (response.ok) {
+        return data as TData
+      }
+
+      throw new Error((data as ErrorResponse).message)
+    })
   }
 }

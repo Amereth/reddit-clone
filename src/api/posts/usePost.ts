@@ -2,11 +2,12 @@ import { useQuery } from '@tanstack/react-query'
 import { useAuthenticatedFetch } from '~/hooks/useAuthenticatedFetch'
 import { type Post } from '~/types'
 
-export const usePosts = () => {
+export const usePost = (id: Post['id']) => {
   const fetch = useAuthenticatedFetch()
 
   return useQuery({
-    queryKey: ['posts'],
-    queryFn: async () => fetch('/posts') as Promise<Post[]>,
+    queryKey: ['posts', id],
+    queryFn: async () => fetch(`/posts/${id}`) as Promise<Post>,
+    enabled: !!id,
   })
 }

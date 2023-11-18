@@ -20,7 +20,7 @@ export const Header = () => {
 
         {!isSignedIn && (
           <SignInButton>
-            <button className='ml-auto'>login</button>
+            <Button className='ml-auto'>login</Button>
           </SignInButton>
         )}
       </header>
