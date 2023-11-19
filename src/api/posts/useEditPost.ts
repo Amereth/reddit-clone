@@ -10,7 +10,7 @@ import { type CreatePostPayload } from './useCreatePost'
 
 export type EditPostPayload = Partial<CreatePostPayload>
 
-type SuccessResponse = WithSuccessResponse<{ insertedId: string }>
+type SuccessResponse = WithSuccessResponse
 
 export const useEditPost = (
   postId: Post['id'],

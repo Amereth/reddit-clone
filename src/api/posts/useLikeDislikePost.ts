@@ -19,7 +19,7 @@ export const useLikeDislikePost = (
     unknown
   >,
 ) => {
-  const fetch = useAuthenticatedFetch()
+  const fetch = useAuthenticatedFetch<WithSuccessResponse>()
   const client = useQueryClient()
 
   return useMutation({
@@ -28,7 +28,7 @@ export const useLikeDislikePost = (
     mutationFn: async ({ action, postId }: LikeDislikePostPayload) =>
       fetch(`/posts/${postId}/${action}`, {
         method: 'PUT',
-      }).then((r) => r.json() as Promise<WithSuccessResponse>),
+      }),
 
     onSuccess(data, variables, context) {
       void client.invalidateQueries({ queryKey: ['posts'] })

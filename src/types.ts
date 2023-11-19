@@ -24,5 +24,9 @@ export type Post = {
 }
 
 export type WithSuccessResponse<T = unknown> = T & {
-  acknowledged: true
+  acknowledged: boolean
+  matchedCount: number
+  modifiedCount: number
+  upsertedCount: number
+  upsertedId: string | null
 }

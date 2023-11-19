@@ -2,11 +2,14 @@ import { SignIn, SignInButton, useUser, UserButton } from '@clerk/nextjs'
 import { Button } from '@nextui-org/react'
 import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import router from 'next/router'
+import { createContext, type ReactElement } from 'react'
+
+export const HeaderContext = createContext<ReactElement | null>(null)
 
 export const Header = () => {
   const { isSignedIn } = useUser()
-  const router = useRouter()
+
   const onGoBack = () => router.back()
 
   return (
