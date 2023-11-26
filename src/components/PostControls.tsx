@@ -1,10 +1,14 @@
 import { useUser } from '@clerk/nextjs'
 import { Button, cn } from '@nextui-org/react'
-import { PencilLineIcon, TrashIcon } from 'lucide-react'
+import {
+  PencilLineIcon,
+  TrashIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from 'lucide-react'
 import { useRouter } from 'next/router'
 import { useDeletePost } from '~/api/posts/useDeletePost'
 import { useLikeDislikePost } from '~/api/posts/useLikeDislikePost'
-import { ArrowIcon } from '~/icons/ArrowIcon'
 import { type Post } from '~/types'
 
 type PostLikeControlsProps = {
@@ -34,7 +38,7 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
         })}
         onClick={() => mutate({ postId: post.id, action: 'like' })}
       >
-        <ArrowIcon className='h-4 w-4' />
+        <ChevronUpIcon />
       </Button>
 
       <span>|</span>
@@ -47,7 +51,7 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
         })}
         onClick={() => mutate({ postId: post.id, action: 'dislike' })}
       >
-        <ArrowIcon className='h-4 w-4 rotate-180' />
+        <ChevronDownIcon />
       </Button>
       <span>{post.dislikes.total}</span>
 
