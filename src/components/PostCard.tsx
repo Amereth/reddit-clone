@@ -2,7 +2,7 @@ import { Avatar, Divider, Link } from '@nextui-org/react'
 import NextLink from 'next/link'
 import { type Post } from '~/types'
 import { cn } from '~/utils/cn'
-import { PostLikeControls } from './PostLikeControls'
+import { PostControls } from './PostControls'
 
 type PostCardProps = {
   post: Post
@@ -58,7 +58,7 @@ export const PostCard = ({ post }: PostCardProps) => {
         <Divider />
 
         <footer className='relative z-20 flex items-center gap-2'>
-          <PostLikeControls post={post} />
+          <PostControls post={post} />
         </footer>
       </div>
     </div>

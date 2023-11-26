@@ -10,7 +10,7 @@ type PostLikeControlsProps = {
   post: Post
 }
 
-export const PostLikeControls = ({ post }: PostLikeControlsProps) => {
+export const PostControls = ({ post }: PostLikeControlsProps) => {
   const router = useRouter()
   const { user } = useUser()
   const { mutate } = useLikeDislikePost()
