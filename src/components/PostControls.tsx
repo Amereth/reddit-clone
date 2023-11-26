@@ -1,7 +1,8 @@
 import { useUser } from '@clerk/nextjs'
 import { Button, cn } from '@nextui-org/react'
-import { PencilLine } from 'lucide-react'
+import { PencilLineIcon, TrashIcon } from 'lucide-react'
 import { useRouter } from 'next/router'
+import { useDeletePost } from '~/api/posts/useDeletePost'
 import { useLikeDislikePost } from '~/api/posts/useLikeDislikePost'
 import { ArrowIcon } from '~/icons/ArrowIcon'
 import { type Post } from '~/types'
@@ -14,6 +15,11 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
   const router = useRouter()
   const { user } = useUser()
   const { mutate } = useLikeDislikePost()
+  const { mutate: deletePost } = useDeletePost({
+    onSuccess() {
+      void router.push('/')
+    },
+  })
 
   const onEditPost = () => router.push(`/edit-post/${post.id}`)
 
@@ -46,14 +52,25 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
       <span>{post.dislikes.total}</span>
 
       {user?.id === post.author.userId && (
-        <Button
-          isIconOnly
-          size='sm'
-          className={cn('ml-auto min-w-0 p-0 hover:text-orange-400')}
-          onClick={onEditPost}
-        >
-          <PencilLine size={20} />
-        </Button>
+        <div className='ml-auto flex gap-4'>
+          <Button
+            isIconOnly
+            size='sm'
+            className={cn('min-w-0 p-0 hover:text-orange-400')}
+            onClick={onEditPost}
+          >
+            <PencilLineIcon size={20} />
+          </Button>
+
+          <Button
+            isIconOnly
+            size='sm'
+            className={cn('min-w-0 p-0 hover:text-orange-400')}
+            onClick={() => deletePost(post.id)}
+          >
+            <TrashIcon size={20} />
+          </Button>
+        </div>
       )}
     </>
   )

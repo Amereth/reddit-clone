@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { toast } from 'sonner'
 import { usePost } from '~/api/posts/usePost'
-import { PostLikeControls } from '~/components/PostLikeControls'
+import { PostControls } from '~/components/PostControls'
 import { url } from '~/utils/url'
 
 export default function PostPage() {
@@ -47,7 +47,7 @@ export default function PostPage() {
       <p className='leading-relaxed'>{post?.body}</p>
 
       <footer className='mt-10 flex w-full items-center gap-2'>
-        <PostLikeControls post={post} />
+        <PostControls post={post} />
       </footer>
     </div>
   )
