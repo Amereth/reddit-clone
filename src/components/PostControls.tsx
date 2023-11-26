@@ -7,8 +7,12 @@ import {
   ChevronUpIcon,
 } from 'lucide-react'
 import { useRouter } from 'next/router'
+import { toast } from 'sonner'
 import { useDeletePost } from '~/api/posts/useDeletePost'
-import { useLikeDislikePost } from '~/api/posts/useLikeDislikePost'
+import {
+  type LikeOrDislikeAction,
+  useLikeDislikePost,
+} from '~/api/posts/useLikeDislikePost'
 import { type Post } from '~/types'
 
 type PostLikeControlsProps = {
@@ -17,13 +21,21 @@ type PostLikeControlsProps = {
 
 export const PostControls = ({ post }: PostLikeControlsProps) => {
   const router = useRouter()
-  const { user } = useUser()
+  const { user, isSignedIn } = useUser()
   const { mutate } = useLikeDislikePost()
   const { mutate: deletePost } = useDeletePost({
     onSuccess() {
       void router.push('/')
     },
   })
+
+  const onLikeOrDislikePost = (action: LikeOrDislikeAction) => {
+    if (!isSignedIn) {
+      toast.error('you must be logged in to do that')
+      return
+    }
+    mutate({ postId: post.id, action })
+  }
 
   const onEditPost = () => router.push(`/edit-post/${post.id}`)
 
@@ -36,7 +48,7 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
         className={cn('p-0 hover:text-orange-400', {
           'text-orange-400': post.likes.isLiked,
         })}
-        onClick={() => mutate({ postId: post.id, action: 'like' })}
+        onClick={() => onLikeOrDislikePost('like')}
       >
         <ChevronUpIcon />
       </Button>
@@ -49,7 +61,7 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
         className={cn('p-0 hover:text-orange-400', {
           'text-orange-400': post.dislikes.isLiked,
         })}
-        onClick={() => mutate({ postId: post.id, action: 'dislike' })}
+        onClick={() => onLikeOrDislikePost('dislike')}
       >
         <ChevronDownIcon />
       </Button>

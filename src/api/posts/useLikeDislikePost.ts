@@ -6,8 +6,10 @@ import {
 import { useAuthenticatedFetch } from '~/hooks/useAuthenticatedFetch'
 import { type WithSuccessResponse, type Post } from '~/types'
 
+export type LikeOrDislikeAction = 'like' | 'dislike'
+
 type LikeDislikePostPayload = {
-  action: 'like' | 'dislike'
+  action: LikeOrDislikeAction
   postId: Post['id']
 }
 
