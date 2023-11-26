@@ -13,6 +13,7 @@ export type Post = {
   body: string
   hashtags: string[]
   author: Author
+  imageUrl: string
   likes: {
     total: number
     isLiked: boolean

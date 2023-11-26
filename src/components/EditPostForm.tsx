@@ -1,17 +1,19 @@
 import { DevTool } from '@hookform/devtools'
 import { Textarea, Button, Chip, Input } from '@nextui-org/react'
 import { xor } from 'lodash'
-import router from 'next/router'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { type Post } from '~/types'
 
-type FormModel = Pick<Post, 'title' | 'body' | 'hashtags'>
+export type EditPotFormModel = Pick<Post, 'title' | 'body' | 'hashtags'> & {
+  image?: File
+}
 
 export type EditPostFormProps = {
-  onSubmit: (data: FormModel) => void
+  onSubmit: (data: EditPotFormModel) => void
   isLoadingSubmit: boolean
-  defaultValues?: FormModel
+  defaultValues?: EditPotFormModel
 }
 
 export const EditPostForm = ({
@@ -19,13 +21,15 @@ export const EditPostForm = ({
   isLoadingSubmit,
   defaultValues,
 }: EditPostFormProps) => {
+  const router = useRouter()
+  const inputRef = useRef<HTMLInputElement>(null)
   const {
     handleSubmit,
     control,
     formState: { errors },
     watch,
     setValue,
-  } = useForm<FormModel>({
+  } = useForm<EditPotFormModel>({
     defaultValues: {
       title: '',
       body: '',
@@ -42,7 +46,7 @@ export const EditPostForm = ({
     <div>
       <form
         className='mx-auto flex max-w-xl flex-col items-center gap-8'
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit((v) => onSubmit(v))}
       >
         <Controller
           control={control}
@@ -85,13 +89,32 @@ export const EditPostForm = ({
           )}
         />
 
-        <div className='flex w-full items-end justify-center gap-8'>
+        <Controller
+          control={control}
+          name='image'
+          render={({ field: { value, onChange, ...field } }) => (
+            <div className='flex items-center gap-4'>
+              <Button onClick={() => inputRef.current?.click()}>
+                choose image
+              </Button>
+              <span>{value?.name}</span>
+              <input
+                type='file'
+                onChange={(e) => onChange(e.target.files?.[0])}
+                {...field}
+                ref={inputRef}
+              />
+            </div>
+          )}
+        />
+
+        <div className='flex w-full max-w-sm items-end justify-center gap-8'>
           <Input
             label='#'
             variant='underlined'
             value={hashtagInputValue}
             onChange={(e) => setHashtagInputValue(e.target.value)}
-            className='w-1/2'
+            className='w-max flex-1'
           />
 
           <Button

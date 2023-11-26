@@ -1,11 +1,11 @@
-import { useParams } from 'next/navigation'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { useEditPost } from '~/api/posts/useEditPost'
 import { usePost } from '~/api/posts/usePost'
 import { EditPostForm, type EditPostFormProps } from '~/components/EditPostForm'
 
 export default function EditPostPage() {
-  const { postId } = useParams<{ postId: string }>()
+  const router = useRouter()
+  const postId = router.query.postId as string
 
   const { data: post, isLoading } = usePost(postId)
 

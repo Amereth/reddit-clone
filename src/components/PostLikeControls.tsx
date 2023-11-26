@@ -1,7 +1,7 @@
 import { useUser } from '@clerk/nextjs'
 import { Button, cn } from '@nextui-org/react'
 import { PencilLine } from 'lucide-react'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { useLikeDislikePost } from '~/api/posts/useLikeDislikePost'
 import { ArrowIcon } from '~/icons/ArrowIcon'
 import { type Post } from '~/types'
@@ -11,6 +11,7 @@ type PostLikeControlsProps = {
 }
 
 export const PostLikeControls = ({ post }: PostLikeControlsProps) => {
+  const router = useRouter()
   const { user } = useUser()
   const { mutate } = useLikeDislikePost()
 
