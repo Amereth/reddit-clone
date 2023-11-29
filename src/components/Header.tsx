@@ -9,16 +9,29 @@ export const HeaderContext = createContext<ReactElement | null>(null)
 
 export const Header = () => {
   const router = useRouter()
+  const { hashtag } = router.query as { hashtag?: string }
+
   const { isSignedIn } = useUser()
 
-  const onGoBack = () => router.back()
+  const onGoBack = () => {
+    if (router.route !== '/') {
+      router.back()
+      return
+    }
+
+    if (hashtag) {
+      void router.push('/')
+    }
+  }
+
+  const isBackButtonVisible = router.route !== '/' || hashtag
 
   return (
     <>
       <header className='flex h-16 items-center border-b-1 px-4'>
         {isSignedIn && (
           <>
-            {router.route !== '/' && (
+            {isBackButtonVisible && (
               <Button isIconOnly onClick={onGoBack} className='mr-4'>
                 <ChevronLeft />
               </Button>

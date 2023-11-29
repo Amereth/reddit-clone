@@ -47,8 +47,8 @@ export const PostCard = ({ post }: PostCardProps) => {
             <Divider />
             <div className='relative z-20 flex flex-wrap gap-4'>
               {post.hashtags.map((tag) => (
-                <NextLink key={tag} href={`/?tag=${tag}`} passHref>
-                  <Link>#{tag}</Link>
+                <NextLink key={tag} href={`/?hashtag=${tag}`} passHref>
+                  <Link as='span'>#{tag}</Link>
                 </NextLink>
               ))}
             </div>
