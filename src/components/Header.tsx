@@ -3,10 +3,7 @@ import { Button } from '@nextui-org/react'
 import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { createContext, type ReactElement } from 'react'
 import { ModeButton } from './ModeButton'
-
-export const HeaderContext = createContext<ReactElement | null>(null)
 
 export const Header = () => {
   const router = useRouter()
