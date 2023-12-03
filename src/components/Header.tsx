@@ -35,7 +35,7 @@ export const Header = () => {
           <UserButton />
         ) : (
           <SignInButton>
-            <Button className='ml-auto'>log in</Button>
+            <Button>log in</Button>
           </SignInButton>
         )}
       </header>
