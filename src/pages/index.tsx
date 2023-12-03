@@ -35,7 +35,7 @@ export default function Home({ initialData }: Props) {
     <div className='flex flex-col items-center gap-4'>
       <Pagination totalPages={totalPages} />
 
-      <div className='grid w-full grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8'>
+      <div className='grid w-full grid-cols-1 gap-4 max-lg:max-w-2xl lg:grid-cols-3 lg:gap-8'>
         {posts?.map((post) => <PostCard key={post.id} post={post} />)}
       </div>
     </div>

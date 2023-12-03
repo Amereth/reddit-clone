@@ -10,7 +10,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
     <HeaderContext.Provider value={null}>
       <div
         className={cn(
-          'flex min-h-[100vh] flex-col bg-background tracking-wide text-foreground dark',
+          'flex min-h-[100vh] flex-col tracking-wide text-foreground',
           raleway.className,
         )}
       >
