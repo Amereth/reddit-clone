@@ -1,6 +1,6 @@
 import { SignIn, SignInButton, useUser, UserButton } from '@clerk/nextjs'
 import { Button } from '@nextui-org/react'
-import { ChevronLeft } from 'lucide-react'
+import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { createContext, type ReactElement } from 'react'
@@ -14,17 +14,6 @@ export const Header = () => {
 
   const { isSignedIn } = useUser()
 
-  const onGoBack = () => {
-    if (router.route !== '/') {
-      router.back()
-      return
-    }
-
-    if (hasParams) {
-      void router.push('/')
-    }
-  }
-
   const isBackButtonVisible = router.route !== '/' || hasParams
 
   return (
@@ -33,8 +22,12 @@ export const Header = () => {
         {isSignedIn && (
           <>
             {isBackButtonVisible && (
-              <Button isIconOnly onClick={onGoBack} className='mr-4'>
-                <ChevronLeft />
+              <Button
+                isIconOnly
+                onClick={() => router.push('/')}
+                className='mr-4'
+              >
+                <HomeIcon size={20} />
               </Button>
             )}
 

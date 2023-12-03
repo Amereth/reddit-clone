@@ -31,3 +31,9 @@ export type WithSuccessResponse<T = unknown> = T & {
   upsertedCount: number
   upsertedId: string | null
 }
+
+export type WithTotal<T = unknown> = T & {
+  data: T
+  total: number
+  perPage: number
+}
