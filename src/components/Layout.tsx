@@ -3,7 +3,7 @@ import { type PropsWithChildren } from 'react'
 import { cn } from '~/utils/cn'
 import { Header, HeaderContext } from './Header'
 
-const raleway = Raleway({ subsets: ['latin'] })
+const raleway = Raleway({ subsets: ['latin', 'cyrillic'] })
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (

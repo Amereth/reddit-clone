@@ -14,12 +14,12 @@ type Props = {
 
 export default function Home({ initialData }: Props) {
   const router = useRouter()
-  const { hashtag } = router.query as { hashtag?: string }
 
-  const { data: posts } = usePosts(hashtag, initialData)
+  const params = new URLSearchParams(router.query as Record<string, string>)
+  const { data: posts } = usePosts(params.toString(), initialData)
 
   return (
-    <div className='grid grid-cols-3 gap-8'>
+    <div className='grid grid-cols-2 gap-8 lg:grid-cols-3'>
       {posts?.map((post) => <PostCard key={post.id} post={post} />)}
     </div>
   )
@@ -28,10 +28,7 @@ export default function Home({ initialData }: Props) {
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<Props>> => {
-  const { hashtag = '' } = context.query
-
-  const params = new URLSearchParams()
-  params.append('hashtag', hashtag as string)
+  const params = new URLSearchParams(context.query as Record<string, string>)
 
   const response = await fetch(url(`/posts?${params.toString()}`))
   const data = (await response.json()) as Post[]

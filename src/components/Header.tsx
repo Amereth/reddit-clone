@@ -9,7 +9,8 @@ export const HeaderContext = createContext<ReactElement | null>(null)
 
 export const Header = () => {
   const router = useRouter()
-  const { hashtag } = router.query as { hashtag?: string }
+  const params = new URLSearchParams(router.query as Record<string, string>)
+  const hasParams = params.toString().length > 0
 
   const { isSignedIn } = useUser()
 
@@ -19,12 +20,12 @@ export const Header = () => {
       return
     }
 
-    if (hashtag) {
+    if (hasParams) {
       void router.push('/')
     }
   }
 
-  const isBackButtonVisible = router.route !== '/' || hashtag
+  const isBackButtonVisible = router.route !== '/' || hasParams
 
   return (
     <>
