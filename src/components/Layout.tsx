@@ -1,17 +1,23 @@
+'use client'
+
 import { Raleway } from 'next/font/google'
 import { type PropsWithChildren } from 'react'
+import { useMode } from '~/hooks/useMode'
 import { cn } from '~/utils/cn'
 import { Header, HeaderContext } from './Header'
 
 const raleway = Raleway({ subsets: ['latin', 'cyrillic'] })
 
 export const Layout = ({ children }: PropsWithChildren) => {
+  const { isDarkMode } = useMode()
+
   return (
     <HeaderContext.Provider value={null}>
       <div
         className={cn(
-          'flex min-h-[100vh] flex-col tracking-wide text-foreground',
+          'flex min-h-[100vh] flex-col bg-background tracking-wide text-foreground',
           raleway.className,
+          isDarkMode && 'dark',
         )}
       >
         <Header />

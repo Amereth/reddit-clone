@@ -17,7 +17,7 @@ export const PostCard = ({ post }: PostCardProps) => {
   const localDate = utcDate.local().format('MMM D, YYYY HH:mm')
 
   return (
-    <div className='relative rounded-xl border-1 hover:border-orange-400 hover:bg-gray-900 hover:opacity-90'>
+    <div className='dakr:hover:bg-gray-900 relative rounded-xl border-1 hover:border-orange-400 dark:hover:opacity-90'>
       <NextLink
         href={`/post/${post.id}`}
         className='absolute left-0 top-0 z-10 h-full w-full rounded-xl'
@@ -31,13 +31,14 @@ export const PostCard = ({ post }: PostCardProps) => {
               className='min-w-min shrink-0 self-start'
             />
           )}
+
           <div className='flex grow flex-col gap-2'>
             <div className='text-xs'>
               <span className='mr-4'>{`${post.author.firstName} ${post.author.lastName}`}</span>{' '}
               <NextLink href={`/?date=${linkDate}`} passHref>
                 <Link
                   as='span'
-                  className='z-20 text-xs text-white sm:whitespace-nowrap'
+                  className='z-20 text-xs dark:text-white sm:whitespace-nowrap'
                 >
                   {localDate}
                 </Link>
