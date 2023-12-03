@@ -23,7 +23,7 @@ export const PostCard = ({ post }: PostCardProps) => {
         className='absolute left-0 top-0 z-10 h-full w-full rounded-xl'
       />
 
-      <div className='relative flex h-full flex-col gap-4 rounded-xl p-4'>
+      <div className='relative flex h-full flex-col gap-2 rounded-xl px-4 py-2 lg:gap-4 lg:py-4'>
         <header className='flex items-center gap-4'>
           {post.author.imageUrl && (
             <Avatar
@@ -53,7 +53,8 @@ export const PostCard = ({ post }: PostCardProps) => {
         <p
           className={cn(
             'mb-auto',
-            postHasTags ? 'line-clamp-5' : 'line-clamp-[8]',
+            postHasTags ? 'lg:line-clamp-5' : 'lg:line-clamp-[8]',
+            'line-clamp-2',
           )}
         >
           {post.body}

@@ -15,7 +15,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
         )}
       >
         <Header />
-        <main className='flex-1 px-4 py-8'>{children}</main>
+        <main className='flex-1 px-4 pt-4 lg:py-8'>{children}</main>
       </div>
     </HeaderContext.Provider>
   )
