@@ -3,6 +3,7 @@ import { Button } from '@nextui-org/react'
 import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ChatRoomButton } from './ChatRoomButton'
 import { ModeButton } from './ModeButton'
 
 export const Header = () => {
@@ -24,12 +25,16 @@ export const Header = () => {
         )}
 
         {isSignedIn && (
-          <Link href='/create-post'>
-            <Button>create post</Button>
-          </Link>
+          <>
+            <Link href='/create-post' className='mr-4'>
+              <Button as='span'>create post</Button>
+            </Link>
+
+            <ChatRoomButton />
+          </>
         )}
 
-        <ModeButton />
+        <ModeButton className='ml-auto mr-4' />
 
         {isSignedIn ? (
           <UserButton />

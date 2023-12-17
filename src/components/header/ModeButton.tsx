@@ -1,14 +1,19 @@
 import { Button } from '@nextui-org/react'
 import { SunIcon, MoonIcon } from 'lucide-react'
 import { useMode } from '~/hooks/useMode'
+import { cn } from '~/utils/cn'
 
-export const ModeButton = () => {
+type ModeButtonProps = {
+  className?: string
+}
+
+export const ModeButton = ({ className }: ModeButtonProps) => {
   const { setMode, isDarkMode } = useMode()
 
   return (
     <Button
       onClick={() => setMode(isDarkMode ? 'light' : 'dark')}
-      className='ml-auto mr-4 min-w-0 p-0'
+      className={cn('min-w-0 p-0', className)}
       variant='light'
       isIconOnly
     >
