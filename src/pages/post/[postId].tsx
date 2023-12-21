@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { toast } from 'sonner'
 import { usePost } from '~/api/posts/usePost'
 import { PostControls } from '~/components/PostControls'
-import { url } from '~/utils/url'
+import { apiUrl } from '~/utils/apiUrl'
 
 export default function PostPage() {
   const router = useRouter()
@@ -32,7 +32,7 @@ export default function PostPage() {
       {post.imageUrl && (
         <div className='relative w-full'>
           <Image
-            src={url(post.imageUrl)}
+            src={apiUrl(post.imageUrl)}
             alt='post image'
             style={{
               width: '100%',

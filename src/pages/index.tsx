@@ -11,7 +11,7 @@ import {
 } from '~/api/posts/usePaginatedPosts'
 import { Pagination } from '~/components/Pagination'
 import { PostCard } from '~/components/PostCard'
-import { url } from '~/utils/url'
+import { apiUrl } from '~/utils/apiUrl'
 
 type Props = {
   initialData?: UsePostsInitialData
@@ -47,7 +47,7 @@ export const getServerSideProps = async (
 ): Promise<GetServerSidePropsResult<Props>> => {
   const params = new URLSearchParams(context.query as PostsQuery)
 
-  const response = await fetch(url(`/posts?${params.toString()}`))
+  const response = await fetch(apiUrl(`/posts?${params.toString()}`))
 
   if (!response.ok) return { props: { initialData: undefined } }
 

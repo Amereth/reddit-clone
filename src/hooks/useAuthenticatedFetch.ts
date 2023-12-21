@@ -1,5 +1,5 @@
 import { useAuth } from '@clerk/nextjs'
-import { url } from '~/utils/url'
+import { apiUrl } from '~/utils/apiUrl'
 
 const methodsWithBody = ['POST', 'PUT', 'PATCH']
 
@@ -29,7 +29,7 @@ export const useAuthenticatedFetch = <TData>() => {
       },
     }
 
-    return fetch(url(input), modifiedInit).then(async (response) => {
+    return fetch(apiUrl(input), modifiedInit).then(async (response) => {
       const data = (await response.json()) as TData | ErrorResponse
 
       if (response.ok) {
