@@ -7,6 +7,7 @@ import dayjsUtcPlugin from 'dayjs/plugin/utc'
 import { type AppType } from 'next/dist/shared/lib/utils'
 import { Toaster } from 'sonner'
 import { Layout } from '~/components/Layout'
+import { ChatRoomProvider } from '~/features/chatRoom/ChatRoomContext'
 import '~/styles/globals.css'
 
 dayjs.extend(dayjsUtcPlugin)
@@ -26,10 +27,12 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     <ClerkProvider>
       <QueryClientProvider client={queryClient}>
         <NextUIProvider>
-          <Layout>
-            <Component {...pageProps} />
-            <Toaster />
-          </Layout>
+          <ChatRoomProvider>
+            <Layout>
+              <Component {...pageProps} />
+              <Toaster />
+            </Layout>
+          </ChatRoomProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </NextUIProvider>
       </QueryClientProvider>

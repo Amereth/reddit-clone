@@ -3,6 +3,7 @@ import { Button, Textarea } from '@nextui-org/react'
 import { useCallback, useState } from 'react'
 import { AuthProtectedPage } from '~/components/AuthProtectedPage'
 import { env } from '~/env.mjs'
+import { useChatRoomContext } from '~/features/chatRoom/ChatRoomContext'
 import { type IncBasicMessage, useWebsocket } from '~/hooks/useWebsocket'
 import { cn } from '~/utils/cn'
 
@@ -18,6 +19,7 @@ function ChatPage() {
   const { user } = useUser()
   const [message, setMessage] = useState('')
   const [history, setHistory] = useState<IncBasicMessage[]>([])
+  const { setOnline } = useChatRoomContext()
 
   const onMessage = useCallback(
     (message: IncBasicMessage) => {
@@ -30,6 +32,10 @@ function ChatPage() {
     url: env.NEXT_PUBLIC_CHAT_ROOM_WS_URL,
     onMessage,
     onHistoryChange: setHistory,
+    onConnectionStatusChange(status) {
+      if (status === WebSocket.OPEN) setOnline(true)
+      if (status === WebSocket.CLOSED) setOnline(false)
+    },
   })
 
   const onPost = () => {
