@@ -24,10 +24,6 @@ export const useWebsocket = ({
   const [socket] = useState<WebSocket>(new WebSocket(url))
 
   useEffect(() => {
-    console.log('getToken')
-  }, [getToken])
-
-  useEffect(() => {
     onConnectionStatusChange?.(socket.readyState)
   }, [socket.readyState, onConnectionStatusChange])
 
