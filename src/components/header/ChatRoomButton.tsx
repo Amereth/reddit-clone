@@ -4,6 +4,7 @@ import { MessagesSquareIcon, CircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useChatRoomContext } from '~/features/chatRoom/ChatRoomContext'
+import { routes } from '~/utils/routes'
 
 export const ChatRoomButton = () => {
   const { isOnline } = useChatRoomContext()
@@ -31,7 +32,7 @@ export const ChatRoomButton = () => {
   }
 
   return (
-    <Link href='/chat'>
+    <Link href={routes.chat}>
       <Button variant='bordered' as='span'>
         <MessagesSquareIcon size={20} />
         chat room

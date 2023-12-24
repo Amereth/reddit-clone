@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import NextLink from 'next/link'
 import { type Post } from '~/types'
 import { cn } from '~/utils/cn'
+import { routes } from '~/utils/routes'
 import { PostControls } from './PostControls'
 
 type PostCardProps = {
@@ -19,7 +20,7 @@ export const PostCard = ({ post }: PostCardProps) => {
   return (
     <div className='dakr:hover:bg-gray-900 relative rounded-xl border-1 hover:border-orange-400 dark:hover:opacity-90'>
       <NextLink
-        href={`/post/${post.id}`}
+        href={routes.posts.byId(post.id)}
         className='absolute left-0 top-0 z-10 h-full w-full rounded-xl'
       />
 

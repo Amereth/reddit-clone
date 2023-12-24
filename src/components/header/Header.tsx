@@ -3,6 +3,7 @@ import { Button } from '@nextui-org/react'
 import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { routes } from '~/utils/routes'
 import { ChatRoomButton } from './ChatRoomButton'
 import { ModeButton } from './ModeButton'
 
@@ -26,7 +27,7 @@ export const Header = () => {
 
         {isSignedIn && (
           <>
-            <Link href='/create-post' className='mr-4'>
+            <Link href={routes.posts.create} className='mr-4'>
               <Button as='span'>create post</Button>
             </Link>
 

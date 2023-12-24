@@ -6,6 +6,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
 } from 'lucide-react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { toast } from 'sonner'
 import { useDeletePost } from '~/api/posts/useDeletePost'
@@ -14,6 +15,7 @@ import {
   useLikeDislikePost,
 } from '~/api/posts/useLikeDislikePost'
 import { type Post } from '~/types'
+import { routes } from '~/utils/routes'
 
 type PostLikeControlsProps = {
   post: Post
@@ -69,14 +71,16 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
 
       {user?.id === post.author.userId && (
         <div className='ml-auto flex gap-4'>
-          <Button
-            isIconOnly
-            size='sm'
-            className={cn('min-w-0 p-0 hover:text-orange-400')}
-            onClick={onEditPost}
-          >
-            <PencilLineIcon size={20} />
-          </Button>
+          <Link href={routes.posts.edit(post.id)}>
+            <Button
+              isIconOnly
+              size='sm'
+              className={cn('min-w-0 p-0 hover:text-orange-400')}
+              as='span'
+            >
+              <PencilLineIcon size={20} />
+            </Button>
+          </Link>
 
           <Button
             isIconOnly
