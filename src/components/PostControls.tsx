@@ -6,6 +6,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
 } from 'lucide-react'
+import { MessageCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { toast } from 'sonner'
@@ -39,8 +40,6 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
     mutate({ postId: post.id, action })
   }
 
-  const onEditPost = () => router.push(`/edit-post/${post.id}`)
-
   return (
     <>
       <span>{post.likes.total}</span>
@@ -68,6 +67,18 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
         <ChevronDownIcon />
       </Button>
       <span>{post.dislikes.total}</span>
+
+      <Link href={routes.posts.byId(post.id)}>
+        <Button
+          size='sm'
+          className='text-md rounded-3xl'
+          variant='bordered'
+          as='span'
+        >
+          <MessageCircleIcon />
+          <span>302</span>
+        </Button>
+      </Link>
 
       {user?.id === post.author.userId && (
         <div className='ml-auto flex gap-4'>
