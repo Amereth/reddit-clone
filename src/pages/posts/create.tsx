@@ -11,6 +11,7 @@ export default function CreatePostPage() {
     },
 
     onError(error) {
+      console.error(error)
       toast.error(error.message)
     },
   })
