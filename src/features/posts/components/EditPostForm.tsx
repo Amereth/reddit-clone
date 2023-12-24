@@ -7,14 +7,14 @@ import { Controller, useForm } from 'react-hook-form'
 import { type Post } from '~/types'
 import { routes } from '~/utils/routes'
 
-export type EditPotFormModel = Pick<Post, 'title' | 'body' | 'hashtags'> & {
+export type EditPostFormModel = Pick<Post, 'title' | 'body' | 'hashtags'> & {
   image?: File
 }
 
 export type EditPostFormProps = {
-  onSubmit: (data: EditPotFormModel) => void
+  onSubmit: (data: EditPostFormModel) => void
   isLoadingSubmit: boolean
-  defaultValues?: EditPotFormModel
+  defaultValues?: EditPostFormModel
 }
 
 export const EditPostForm = ({
@@ -29,7 +29,7 @@ export const EditPostForm = ({
     formState: { errors },
     watch,
     setValue,
-  } = useForm<EditPotFormModel>({
+  } = useForm<EditPostFormModel>({
     defaultValues: {
       title: '',
       body: '',
