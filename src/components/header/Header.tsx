@@ -20,9 +20,11 @@ export const Header = () => {
     <>
       <header className='flex h-16 items-center border-b-1 px-4'>
         {isBackButtonVisible && (
-          <Button isIconOnly onClick={() => router.push('/')} className='mr-4'>
-            <HomeIcon size={20} />
-          </Button>
+          <Link href={routes.home}>
+            <Button isIconOnly className='mr-4' as='span'>
+              <HomeIcon size={20} />
+            </Button>
+          </Link>
         )}
 
         {isSignedIn && (

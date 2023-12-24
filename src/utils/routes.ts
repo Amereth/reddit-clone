@@ -19,7 +19,7 @@ const postsRoutes = {
 }
 
 export const routes = {
-  home: () => '/',
+  home: '/',
   chat: '/chat',
   posts: postsRoutes,
 } as const

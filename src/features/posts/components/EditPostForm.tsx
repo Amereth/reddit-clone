@@ -1,10 +1,11 @@
 import { DevTool } from '@hookform/devtools'
 import { Textarea, Button, Chip, Input } from '@nextui-org/react'
 import { xor } from 'lodash'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { type Post } from '~/types'
+import { routes } from '~/utils/routes'
 
 export type EditPotFormModel = Pick<Post, 'title' | 'body' | 'hashtags'> & {
   image?: File
@@ -21,7 +22,6 @@ export const EditPostForm = ({
   isLoadingSubmit,
   defaultValues,
 }: EditPostFormProps) => {
-  const router = useRouter()
   const inputRef = useRef<HTMLInputElement>(null)
   const {
     handleSubmit,
@@ -145,14 +145,12 @@ export const EditPostForm = ({
         </div>
 
         <div className='mt-8 flex gap-10'>
-          <Button
-            size='lg'
-            type='reset'
-            variant='bordered'
-            onClick={() => router.push('/')}
-          >
-            cancel
-          </Button>
+          <Link href={routes.home}>
+            <Button size='lg' type='reset' variant='bordered' as='span'>
+              cancel
+            </Button>
+          </Link>
+
           <Button
             size='lg'
             type='submit'
