@@ -10,11 +10,11 @@ import { MessageCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { toast } from 'sonner'
-import { useDeletePost } from '~/api/posts/useDeletePost'
+import { useDeletePost } from '~/features/posts/hooks/useDeletePost'
 import {
   type LikeOrDislikeAction,
   useLikeDislikePost,
-} from '~/api/posts/useLikeDislikePost'
+} from '~/features/posts/hooks/useLikeDislikePost'
 import { type Post } from '~/types'
 import { routes } from '~/utils/routes'
 

@@ -2,8 +2,8 @@ import { User } from '@nextui-org/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { toast } from 'sonner'
-import { usePost } from '~/api/posts/usePost'
-import { PostControls } from '~/components/PostControls'
+import { PostControls } from '~/features/posts/components/PostControls'
+import { usePost } from '~/features/posts/hooks/usePost'
 import { apiUrl } from '~/utils/apiUrl'
 
 export default function PostPage() {

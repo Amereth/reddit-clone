@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { toast } from 'sonner'
-import { useCreatePost } from '~/api/posts/useCreatePost'
-import { EditPostForm } from '~/components/EditPostForm'
+import { EditPostForm } from '~/features/posts/components/EditPostForm'
+import { useCreatePost } from '~/features/posts/hooks/useCreatePost'
 
 export default function CreatePostPage() {
   const router = useRouter()

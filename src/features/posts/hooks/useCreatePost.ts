@@ -4,7 +4,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { type EditPotFormModel } from '~/components/EditPostForm'
+import { type EditPotFormModel } from '~/features/posts/components/EditPostForm'
 import { useAuthenticatedFetch } from '~/hooks/useAuthenticatedFetch'
 import { type WithSuccessResponse } from '~/types'
 

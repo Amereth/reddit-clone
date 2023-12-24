@@ -4,13 +4,13 @@ import {
   type GetServerSidePropsContext,
 } from 'next'
 import { toast } from 'sonner'
+import { Pagination } from '~/components/Pagination'
+import { PostCard } from '~/features/posts/components/PostCard'
 import {
   type PostsQuery,
   usePaginatedPosts,
   type UsePostsInitialData,
-} from '~/api/posts/usePaginatedPosts'
-import { Pagination } from '~/components/Pagination'
-import { PostCard } from '~/components/PostCard'
+} from '~/features/posts/hooks/usePaginatedPosts'
 import { apiUrl } from '~/utils/apiUrl'
 
 type Props = {
