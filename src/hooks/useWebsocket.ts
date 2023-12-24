@@ -6,7 +6,7 @@ import { type Author } from '~/types'
 type Args = {
   url: string
   onConnectionStatusChange?: (status: WebSocket['readyState']) => void
-  onHistoryChange?: (history: IncBasicMessage[]) => void
+  onHistoryChange?: (history: MessageContent[]) => void
   onMessage?: (message: IncBasicMessage) => void
   onError?: (error: unknown) => void
 }
@@ -97,12 +97,16 @@ export type ErrorMessage = {
 
 export type HistoryMessage = {
   type: 'history'
-  content: IncBasicMessage[]
+  content: MessageContent[]
 }
 
 export type IncBasicMessage = {
-  id: string
   type: 'message'
+  content: MessageContent
+}
+
+export type MessageContent = {
+  id: string
   content: string
   author: Author
   createdAt: string

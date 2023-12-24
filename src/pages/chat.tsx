@@ -4,7 +4,11 @@ import { useCallback, useState } from 'react'
 import { AuthProtectedPage } from '~/components/AuthProtectedPage'
 import { env } from '~/env.mjs'
 import { useChatRoomContext } from '~/features/chatRoom/ChatRoomContext'
-import { type IncBasicMessage, useWebsocket } from '~/hooks/useWebsocket'
+import {
+  type IncBasicMessage,
+  useWebsocket,
+  type MessageContent,
+} from '~/hooks/useWebsocket'
 import { cn } from '~/utils/cn'
 
 export default function Page() {
@@ -18,12 +22,12 @@ export default function Page() {
 function ChatPage() {
   const { user } = useUser()
   const [message, setMessage] = useState('')
-  const [history, setHistory] = useState<IncBasicMessage[]>([])
+  const [history, setHistory] = useState<MessageContent[]>([])
   const { setOnline } = useChatRoomContext()
 
   const onMessage = useCallback(
     (message: IncBasicMessage) => {
-      setHistory((prev) => [...prev, message])
+      setHistory((prev) => [...prev, message.content])
     },
     [setHistory],
   )
