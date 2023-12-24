@@ -43,126 +43,124 @@ export const EditPostForm = ({
   const hashtags = watch('hashtags')
 
   return (
-    <div>
-      <form
-        className='mx-auto flex max-w-xl flex-col items-center gap-8'
-        onSubmit={handleSubmit((v) => onSubmit(v))}
-      >
-        <Controller
-          control={control}
-          name='title'
-          rules={{
-            required: 'post title is required',
-            minLength: {
-              value: 3,
-              message: 'post title should be at least 3 characters long',
-            },
-          }}
-          render={({ field }) => (
-            <Input
-              label='title'
-              variant='underlined'
-              isInvalid={!!errors.title}
-              errorMessage={errors.title?.message}
-              {...field}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name='body'
-          rules={{
-            required: 'post body is required',
-            minLength: {
-              value: 10,
-              message: 'post body should be at least 10 characters long',
-            },
-          }}
-          render={({ field }) => (
-            <Textarea
-              variant='bordered'
-              isInvalid={!!errors.body}
-              errorMessage={errors.body?.message}
-              {...field}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name='image'
-          render={({ field: { value, onChange, ...field } }) => (
-            <div className='flex items-center gap-4'>
-              <Button onClick={() => inputRef.current?.click()}>
-                choose image
-              </Button>
-              <span>{value?.name}</span>
-              <input
-                type='file'
-                onChange={(e) => onChange(e.target.files?.[0])}
-                {...field}
-                ref={inputRef}
-              />
-            </div>
-          )}
-        />
-
-        <div className='flex w-full max-w-sm items-end justify-center gap-8'>
+    <form
+      className='mx-auto flex w-full max-w-xl flex-col items-center gap-8'
+      onSubmit={handleSubmit((v) => onSubmit(v))}
+    >
+      <Controller
+        control={control}
+        name='title'
+        rules={{
+          required: 'post title is required',
+          minLength: {
+            value: 3,
+            message: 'post title should be at least 3 characters long',
+          },
+        }}
+        render={({ field }) => (
           <Input
-            label='#'
+            label='title'
             variant='underlined'
-            value={hashtagInputValue}
-            onChange={(e) => setHashtagInputValue(e.target.value)}
-            className='w-max flex-1'
+            isInvalid={!!errors.title}
+            errorMessage={errors.title?.message}
+            {...field}
           />
+        )}
+      />
 
-          <Button
-            onClick={() => {
-              if (!hashtagInputValue) return
-              if (hashtags.includes(hashtagInputValue)) return
+      <Controller
+        control={control}
+        name='body'
+        rules={{
+          required: 'post body is required',
+          minLength: {
+            value: 10,
+            message: 'post body should be at least 10 characters long',
+          },
+        }}
+        render={({ field }) => (
+          <Textarea
+            variant='bordered'
+            isInvalid={!!errors.body}
+            errorMessage={errors.body?.message}
+            {...field}
+          />
+        )}
+      />
 
-              setValue('hashtags', [...hashtags, hashtagInputValue])
-              setHashtagInputValue('')
-            }}
-          >
-            add #
-          </Button>
-        </div>
-
-        <div className='flex w-full flex-wrap justify-center gap-4'>
-          {hashtags.map((hashtag) => (
-            <Chip
-              color='warning'
-              variant='flat'
-              key={hashtag}
-              size='lg'
-              onClose={() => setValue('hashtags', xor(hashtags, [hashtag]))}
-            >
-              {hashtag}
-            </Chip>
-          ))}
-        </div>
-
-        <div className='mt-8 flex gap-10'>
-          <Link href={routes.home}>
-            <Button size='lg' type='reset' variant='bordered' as='span'>
-              cancel
+      <Controller
+        control={control}
+        name='image'
+        render={({ field: { value, onChange, ...field } }) => (
+          <div className='flex items-center gap-4'>
+            <Button onClick={() => inputRef.current?.click()}>
+              choose image
             </Button>
-          </Link>
+            <span>{value?.name}</span>
+            <input
+              type='file'
+              onChange={(e) => onChange(e.target.files?.[0])}
+              {...field}
+              ref={inputRef}
+            />
+          </div>
+        )}
+      />
 
-          <Button
+      <div className='flex w-full max-w-sm items-end justify-center gap-8'>
+        <Input
+          label='#'
+          variant='underlined'
+          value={hashtagInputValue}
+          onChange={(e) => setHashtagInputValue(e.target.value)}
+          className='w-max flex-1'
+        />
+
+        <Button
+          onClick={() => {
+            if (!hashtagInputValue) return
+            if (hashtags.includes(hashtagInputValue)) return
+
+            setValue('hashtags', [...hashtags, hashtagInputValue])
+            setHashtagInputValue('')
+          }}
+        >
+          add #
+        </Button>
+      </div>
+
+      <div className='flex w-full flex-wrap justify-center gap-4'>
+        {hashtags.map((hashtag) => (
+          <Chip
+            color='warning'
+            variant='flat'
+            key={hashtag}
             size='lg'
-            type='submit'
-            className='w-min'
-            isLoading={isLoadingSubmit}
+            onClose={() => setValue('hashtags', xor(hashtags, [hashtag]))}
           >
-            submit
-          </Button>
-        </div>
+            {hashtag}
+          </Chip>
+        ))}
+      </div>
 
-        <DevTool control={control} />
-      </form>
-    </div>
+      <div className='mt-8 flex gap-10'>
+        <Link href={routes.home}>
+          <Button size='lg' type='reset' variant='bordered' as='span'>
+            cancel
+          </Button>
+        </Link>
+
+        <Button
+          size='lg'
+          type='submit'
+          className='w-min'
+          isLoading={isLoadingSubmit}
+        >
+          submit
+        </Button>
+      </div>
+
+      <DevTool control={control} />
+    </form>
   )
 }
