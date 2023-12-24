@@ -1,4 +1,4 @@
-import { Pagination as PaginationUi } from '@nextui-org/react'
+import { Pagination as NextUiPagination } from '@nextui-org/react'
 import { useRouter } from 'next/router'
 
 type Props = {
@@ -7,6 +7,8 @@ type Props = {
 
 export const Pagination = ({ totalPages }: Props) => {
   const router = useRouter()
+
+  if (totalPages < 2) return null
 
   const page = Number(router.query.page) || 1
 
@@ -18,7 +20,7 @@ export const Pagination = ({ totalPages }: Props) => {
   }
 
   return (
-    <PaginationUi
+    <NextUiPagination
       variant='light'
       total={totalPages}
       size='sm'
