@@ -28,7 +28,6 @@ export const useWebsocket = ({
   }, [socket.readyState, onConnectionStatusChange])
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     socket.addEventListener('open', async () => {
       const token = await getToken()
       if (!token) return

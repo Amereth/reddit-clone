@@ -27,7 +27,7 @@ const config = {
     '@typescript-eslint/no-misused-promises': [
       2,
       {
-        checksVoidReturn: { attributes: false },
+        checksVoidReturn: { attributes: false, arguments: false },
       },
     ],
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
