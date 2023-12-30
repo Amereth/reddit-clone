@@ -1,9 +1,4 @@
-export type Author = {
-  userId: string
-  firstName: string | null
-  lastName: string | null
-  imageUrl: string | null
-}
+import { z } from 'zod'
 
 export type Post = {
   id: string
@@ -22,7 +17,28 @@ export type Post = {
     total: number
     isLiked: boolean
   }
+  comments: PostComment[]
 }
+
+const author = z.object({
+  userId: z.string(),
+  firstName: z.string().nullable(),
+  lastName: z.string().nullable(),
+  imageUrl: z.string().nullable(),
+})
+
+type Author = z.infer<typeof author>
+
+export const postComment = z.object({
+  body: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date().optional(),
+  likes: z.array(z.string()).default([]),
+  dislikes: z.array(z.string()).default([]),
+  author,
+})
+
+export type PostComment = z.infer<typeof postComment>
 
 export type WithSuccessResponse<T = unknown> = T & {
   acknowledged: boolean

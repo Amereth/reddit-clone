@@ -16,5 +16,5 @@ export default function CreatePostPage() {
     },
   })
 
-  return <EditPostForm onSubmit={mutate} isLoadingSubmit={isPending} />
+  return <EditPostForm onSubmit={mutate} isSubmitting={isPending} />
 }

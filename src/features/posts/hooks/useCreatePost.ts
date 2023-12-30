@@ -13,13 +13,13 @@ export type CreatePostPayload = EditPostFormModel
 type SuccessResponse = WithSuccessResponse<{ insertedId: string }>
 
 export const useCreatePost = (
-  props?: MutationOptions<SuccessResponse, Error, CreatePostPayload, unknown>,
+  options?: MutationOptions<SuccessResponse, Error, CreatePostPayload>,
 ) => {
   const fetch = useAuthenticatedFetch<SuccessResponse>()
   const client = useQueryClient()
 
   return useMutation({
-    ...props,
+    ...options,
 
     mutationFn: async (values: CreatePostPayload) => {
       if (!values.image) {
@@ -46,7 +46,7 @@ export const useCreatePost = (
       toast.success('post created successfully')
       void client.invalidateQueries({ queryKey: ['posts'] })
 
-      props?.onSuccess?.(data, variables, context)
+      options?.onSuccess?.(data, variables, context)
     },
   })
 }

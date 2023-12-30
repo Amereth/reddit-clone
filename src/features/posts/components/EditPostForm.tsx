@@ -13,13 +13,13 @@ export type EditPostFormModel = Pick<Post, 'title' | 'body' | 'hashtags'> & {
 
 export type EditPostFormProps = {
   onSubmit: (data: EditPostFormModel) => void
-  isLoadingSubmit: boolean
+  isSubmitting: boolean
   defaultValues?: EditPostFormModel
 }
 
 export const EditPostForm = ({
   onSubmit,
-  isLoadingSubmit,
+  isSubmitting,
   defaultValues,
 }: EditPostFormProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -45,7 +45,7 @@ export const EditPostForm = ({
   return (
     <form
       className='mx-auto flex w-full max-w-xl flex-col items-center gap-8'
-      onSubmit={handleSubmit((v) => onSubmit(v))}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Controller
         control={control}
@@ -55,6 +55,10 @@ export const EditPostForm = ({
           minLength: {
             value: 3,
             message: 'post title should be at least 3 characters long',
+          },
+          maxLength: {
+            value: 1000,
+            message: 'post title should be at most 1000 characters long',
           },
         }}
         render={({ field }) => (
@@ -76,6 +80,10 @@ export const EditPostForm = ({
           minLength: {
             value: 10,
             message: 'post body should be at least 10 characters long',
+          },
+          maxLength: {
+            value: 1000,
+            message: 'post body should be at most 1000 characters long',
           },
         }}
         render={({ field }) => (
@@ -154,7 +162,7 @@ export const EditPostForm = ({
           size='lg'
           type='submit'
           className='w-min'
-          isLoading={isLoadingSubmit}
+          isLoading={isSubmitting}
         >
           submit
         </Button>

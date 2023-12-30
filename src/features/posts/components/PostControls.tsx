@@ -9,6 +9,7 @@ import {
 import { MessageCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { type MouseEvent } from 'react'
 import { toast } from 'sonner'
 import { useDeletePost } from '~/features/posts/hooks/useDeletePost'
 import {
@@ -20,9 +21,13 @@ import { routes } from '~/utils/routes'
 
 type PostLikeControlsProps = {
   post: Post
+  onCommentClick?: (e: MouseEvent<HTMLButtonElement>) => void
 }
 
-export const PostControls = ({ post }: PostLikeControlsProps) => {
+export const PostControls = ({
+  post,
+  onCommentClick,
+}: PostLikeControlsProps) => {
   const router = useRouter()
   const { user, isSignedIn } = useUser()
   const { mutate } = useLikeDislikePost()
@@ -42,46 +47,52 @@ export const PostControls = ({ post }: PostLikeControlsProps) => {
 
   return (
     <>
-      <span>{post.likes.total}</span>
-      <Button
-        isIconOnly
-        size='sm'
-        className={cn('p-0 hover:text-orange-400', {
-          'text-orange-400': post.likes.isLiked,
-        })}
-        onClick={() => onLikeOrDislikePost('like')}
-      >
-        <ChevronUpIcon />
-      </Button>
-
-      <span>|</span>
-
-      <Button
-        isIconOnly
-        size='sm'
-        className={cn('p-0 hover:text-orange-400', {
-          'text-orange-400': post.dislikes.isLiked,
-        })}
-        onClick={() => onLikeOrDislikePost('dislike')}
-      >
-        <ChevronDownIcon />
-      </Button>
-      <span>{post.dislikes.total}</span>
-
-      <Link href={routes.posts.byId(post.id)}>
+      <div className='flex items-center gap-3 rounded-3xl border-1 border-gray-700 px-3 py-1'>
+        <span>{post.likes.total}</span>
         <Button
+          isIconOnly
           size='sm'
-          className='text-md rounded-3xl'
-          variant='bordered'
-          as='span'
+          className={cn('p-0 hover:text-orange-400', {
+            'text-orange-400': post.likes.isLiked,
+          })}
+          onClick={() => onLikeOrDislikePost('like')}
+        >
+          <ChevronUpIcon />
+        </Button>
+
+        <Button
+          isIconOnly
+          size='sm'
+          className={cn('p-0 hover:text-orange-400', {
+            'text-orange-400': post.dislikes.isLiked,
+          })}
+          onClick={() => onLikeOrDislikePost('dislike')}
+        >
+          <ChevronDownIcon />
+        </Button>
+        <span>{post.dislikes.total}</span>
+      </div>
+
+      {onCommentClick ? (
+        <Button
+          onClick={onCommentClick}
+          className='flex items-center gap-2 rounded-3xl border-1 border-gray-700 px-3 py-1 hover:border-orange-400'
         >
           <MessageCircleIcon />
-          <span>302</span>
+          <span>{post.comments.length}</span>
         </Button>
-      </Link>
+      ) : (
+        <Link
+          href={routes.posts.byId(post.id)}
+          className='flex items-center gap-2 rounded-3xl border-1 border-gray-700 px-3 py-1 hover:border-orange-400'
+        >
+          <MessageCircleIcon />
+          <span>{post.comments.length}</span>
+        </Link>
+      )}
 
       {user?.id === post.author.userId && (
-        <div className='ml-auto flex gap-4'>
+        <div className='ml-auto flex items-center gap-3 rounded-3xl border-1 border-gray-700 px-3 py-1'>
           <Link href={routes.posts.edit(post.id)}>
             <Button
               isIconOnly

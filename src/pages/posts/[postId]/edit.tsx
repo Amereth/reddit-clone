@@ -29,7 +29,7 @@ export default function EditPostPage() {
   return (
     <EditPostForm
       onSubmit={mutate}
-      isLoadingSubmit={isPending}
+      isSubmitting={isPending}
       defaultValues={defaultValues}
     />
   )

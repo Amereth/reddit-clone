@@ -1,8 +1,14 @@
 import { User } from '@nextui-org/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { toast } from 'sonner'
+import {
+  type CommentFormModel,
+  EditCommentForm,
+} from '~/features/posts/components/EditCommentForm'
 import { PostControls } from '~/features/posts/components/PostControls'
+import { useCreateComment } from '~/features/posts/hooks/useCreateComment'
 import { usePost } from '~/features/posts/hooks/usePost'
 import { apiUrl } from '~/utils/apiUrl'
 
@@ -12,6 +18,13 @@ export default function PostPage() {
 
   const { data: post, error } = usePost(postId)
 
+  const [showCommentForm, setShowCommentForm] = useState(false)
+  const { mutate, isPending } = useCreateComment({
+    onSuccess: () => {
+      setShowCommentForm(false)
+    },
+  })
+
   if (error) {
     toast.error(error.message)
     void router.push('/')
@@ -19,6 +32,13 @@ export default function PostPage() {
   }
 
   if (!post) return null
+
+  const createComment = (comment: CommentFormModel) => {
+    mutate({
+      postId: post.id,
+      comment,
+    })
+  }
 
   return (
     <div className='mx-auto flex max-w-xl flex-col items-start gap-6'>
@@ -47,8 +67,15 @@ export default function PostPage() {
       <p className='leading-relaxed'>{post?.body}</p>
 
       <footer className='mt-10 flex w-full items-center gap-2'>
-        <PostControls post={post} />
+        <PostControls
+          post={post}
+          onCommentClick={() => setShowCommentForm(true)}
+        />
       </footer>
+
+      {showCommentForm && (
+        <EditCommentForm onSubmit={createComment} isSubmitting={isPending} />
+      )}
     </div>
   )
 }
