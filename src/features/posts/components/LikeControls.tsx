@@ -2,8 +2,8 @@ import { Button, cn } from '@nextui-org/react'
 import { ChevronUpIcon, ChevronDownIcon } from 'lucide-react'
 
 type LikeControlsProps = {
-  totalLikes: number
-  totalDislikes: number
+  likes: number
+  dislikes: number
   isLiked: boolean
   isDisliked: boolean
   onLike: () => void
@@ -11,8 +11,8 @@ type LikeControlsProps = {
 }
 
 export const LikeControls = ({
-  totalLikes,
-  totalDislikes,
+  likes,
+  dislikes,
   isLiked,
   isDisliked,
   onLike,
@@ -20,7 +20,7 @@ export const LikeControls = ({
 }: LikeControlsProps) => {
   return (
     <>
-      <span>{totalLikes}</span>
+      <span>{likes}</span>
       <Button
         isIconOnly
         size='sm'
@@ -42,7 +42,7 @@ export const LikeControls = ({
       >
         <ChevronDownIcon />
       </Button>
-      <span>{totalDislikes}</span>
+      <span>{dislikes}</span>
     </>
   )
 }

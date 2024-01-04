@@ -45,10 +45,10 @@ export const PostControls = ({
     <>
       <div className='flex items-center gap-3 rounded-3xl border-1 border-gray-700 px-3 py-1'>
         <LikeControls
-          totalLikes={post.likes.total}
-          totalDislikes={post.dislikes.total}
-          isLiked={post.likes.isLiked}
-          isDisliked={post.dislikes.isLiked}
+          likes={post.likes}
+          dislikes={post.dislikes}
+          isLiked={post.isLiked}
+          isDisliked={post.isLiked}
           onLike={() => onLikeOrDislikePost('like')}
           onDislike={() => onLikeOrDislikePost('dislike')}
         />

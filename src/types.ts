@@ -1,25 +1,5 @@
 import { z } from 'zod'
 
-export type Post = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  title: string
-  body: string
-  hashtags: string[]
-  author: Author
-  imageUrl: string
-  likes: {
-    total: number
-    isLiked: boolean
-  }
-  dislikes: {
-    total: number
-    isLiked: boolean
-  }
-  comments: PostComment[]
-}
-
 const author = z.object({
   userId: z.string(),
   firstName: z.string().nullable(),
@@ -27,18 +7,38 @@ const author = z.object({
   imageUrl: z.string().nullable(),
 })
 
-type Author = z.infer<typeof author>
+export type Author = z.infer<typeof author>
 
 export const postComment = z.object({
   body: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date().optional(),
-  likes: z.array(z.string()).default([]),
-  dislikes: z.array(z.string()).default([]),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime().optional().nullable().default(null),
+  likes: z.number().default(0),
+  dislikes: z.number().default(0),
+  isLiked: z.boolean().default(false),
+  isDisliked: z.boolean().default(false),
   author,
 })
 
 export type PostComment = z.infer<typeof postComment>
+
+export const post = z.object({
+  id: z.string(),
+  title: z.string(),
+  body: z.string(),
+  hashtags: z.array(z.string()).default([]),
+  imageUrl: z.string().nullable().default(null),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime().optional().nullable().default(null),
+  likes: z.number().default(0),
+  dislikes: z.number().default(0),
+  isLiked: z.boolean().default(false),
+  isDisliked: z.boolean().default(false),
+  author,
+  comments: z.array(postComment).default([]),
+})
+
+export type Post = z.infer<typeof post>
 
 export type WithSuccessResponse<T = unknown> = T & {
   acknowledged: boolean
