@@ -65,7 +65,7 @@ export default function PostPage() {
 
       <p className='leading-relaxed'>{post?.body}</p>
 
-      <footer className='mt-10 flex w-full items-center gap-2'>
+      <footer className='mt-10 flex w-full items-center gap-2 rounded-medium border-1 border-gray-700 py-1'>
         <PostControls
           post={post}
           onCommentClick={() => setShowCommentForm((v) => !v)}

@@ -1,3 +1,4 @@
+import { useUser } from '@clerk/nextjs'
 import { type PostComment } from '~/types'
 import { EditControls } from './EditControls'
 import { LikeControls } from './LikeControls'
@@ -7,20 +8,23 @@ type PostCommentProps = {
 }
 
 export const Comment = ({ comment }: PostCommentProps) => {
+  const { user } = useUser()
+
   return (
-    <div className='flex w-full flex-col items-start'>
-      <p>{comment.body}</p>
-      <div className='flex items-center gap-2 rounded-3xl border-1 border-gray-700 px-3 py-1'>
+    <div className='flex w-full flex-col items-start rounded-medium border-1 border-gray-700 py-1'>
+      <p className='px-3'>{comment.body}</p>
+
+      <div className='flex items-center gap-2 px-3 py-1'>
         <LikeControls
-          likes={2}
-          isLiked={false}
+          likes={comment.likes}
+          isLiked={comment.isLiked}
           onLike={() => null}
-          dislikes={1}
-          isDisliked={false}
+          dislikes={comment.dislikes}
+          isDisliked={comment.isDisliked}
           onDislike={() => null}
         />
 
-        <EditControls />
+        {comment.author.userId === user?.id && <EditControls />}
       </div>
     </div>
   )

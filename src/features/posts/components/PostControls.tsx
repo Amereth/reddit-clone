@@ -43,7 +43,7 @@ export const PostControls = ({
 
   return (
     <>
-      <div className='flex items-center gap-3 rounded-3xl border-1 border-gray-700 px-3 py-1'>
+      <div className='flex items-center gap-3 px-3 py-1'>
         <LikeControls
           likes={post.likes}
           dislikes={post.dislikes}
@@ -57,8 +57,8 @@ export const PostControls = ({
       {onCommentClick ? (
         <Button
           onClick={onCommentClick}
-          className='flex items-center gap-2 rounded-3xl border-1 border-gray-700 px-3 py-1 hover:border-orange-400'
-          variant='bordered'
+          className='flex items-center gap-2 px-3 py-1 hover:border-orange-400'
+          variant='light'
         >
           <MessageCircleIcon />
           <span>{post.comments.length}</span>
@@ -66,7 +66,7 @@ export const PostControls = ({
       ) : (
         <Link
           href={routes.posts.byId(post.id)}
-          className='flex items-center gap-2 rounded-3xl border-1 border-gray-700 px-3 py-1 hover:border-orange-400'
+          className='flex items-center gap-2 px-3 py-1 hover:border-orange-400'
         >
           <MessageCircleIcon />
           <span>{post.comments.length}</span>
@@ -74,7 +74,7 @@ export const PostControls = ({
       )}
 
       {user?.id === post.author.userId && (
-        <div className='ml-auto flex items-center gap-3 rounded-3xl border-1 border-gray-700 px-3 py-1'>
+        <div className='ml-auto flex items-center gap-3 px-3 py-1'>
           <EditControls
             editLink={routes.posts.edit(post.id)}
             onDelete={() => deletePost(post.id)}
