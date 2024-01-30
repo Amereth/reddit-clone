@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useAuthenticatedFetch } from '~/hooks/useAuthenticatedFetch'
 import { type Post } from '~/types'
 
-export const usePost = (id: Post['id']) => {
+export const usePost = (id: Post['_id']) => {
   const fetch = useAuthenticatedFetch()
 
   return useQuery({

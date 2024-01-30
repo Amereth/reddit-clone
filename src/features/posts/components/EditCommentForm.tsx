@@ -6,12 +6,14 @@ export type CommentFormModel = Pick<PostComment, 'body'>
 
 export type CommentFormProps = {
   onSubmit: (data: CommentFormModel) => void
+  onCancel: () => void
   isSubmitting: boolean
   defaultValues?: CommentFormModel
 }
 
 export const EditCommentForm = ({
   onSubmit,
+  onCancel,
   defaultValues,
   isSubmitting,
 }: CommentFormProps) => {
@@ -38,14 +40,26 @@ export const EditCommentForm = ({
           />
         )}
       />
-      <Button
-        size='lg'
-        type='submit'
-        className='ml-auto mt-2 block w-min'
-        isLoading={isSubmitting}
-      >
-        {!isSubmitting && 'submit'}
-      </Button>
+
+      <div className='flex gap-2'>
+        <Button
+          size='md'
+          type='reset'
+          className='ml-auto mt-2 block w-min'
+          onClick={onCancel}
+        >
+          cancel
+        </Button>
+
+        <Button
+          size='md'
+          type='submit'
+          className='mt-2 block w-min'
+          isLoading={isSubmitting}
+        >
+          {!isSubmitting && 'submit'}
+        </Button>
+      </div>
     </form>
   )
 }

@@ -8,7 +8,7 @@ import { useAuthenticatedFetch } from '~/hooks/useAuthenticatedFetch'
 import { type Post, type PostComment, type WithSuccessResponse } from '~/types'
 
 type Payload = {
-  postId: Post['id']
+  postId: Post['_id']
   comment: Pick<PostComment, 'body'>
 }
 
@@ -22,7 +22,7 @@ export const useCreateComment = (
 
   return useMutation({
     mutationFn: async ({ postId, comment }: Payload) =>
-      fetch(`/posts/${postId}/comment`, {
+      fetch(`/posts/${postId}/comments`, {
         method: 'POST',
         body: JSON.stringify(comment),
       }),

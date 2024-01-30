@@ -10,6 +10,7 @@ const author = z.object({
 export type Author = z.infer<typeof author>
 
 export const postComment = z.object({
+  _id: z.string(),
   body: z.string(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime().optional().nullable().default(null),
@@ -23,7 +24,7 @@ export const postComment = z.object({
 export type PostComment = z.infer<typeof postComment>
 
 export const post = z.object({
-  id: z.string(),
+  _id: z.string(),
   title: z.string(),
   body: z.string(),
   hashtags: z.array(z.string()).default([]),

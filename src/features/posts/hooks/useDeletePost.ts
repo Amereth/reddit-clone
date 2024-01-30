@@ -10,7 +10,7 @@ import { type Post, type WithSuccessResponse } from '~/types'
 type SuccessResponse = WithSuccessResponse
 
 export const useDeletePost = (
-  props?: MutationOptions<SuccessResponse, Error, Post['id']>,
+  props?: MutationOptions<SuccessResponse, Error, Post['_id']>,
 ) => {
   const fetch = useAuthenticatedFetch<SuccessResponse>()
   const client = useQueryClient()
@@ -18,7 +18,7 @@ export const useDeletePost = (
   return useMutation({
     ...props,
 
-    mutationFn: async (postId: Post['id']) =>
+    mutationFn: async (postId: Post['_id']) =>
       fetch(`/posts/${postId}`, { method: 'DELETE' }),
 
     onSuccess(data, variables, context) {

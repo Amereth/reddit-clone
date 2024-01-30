@@ -20,7 +20,7 @@ export const PostCard = ({ post }: PostCardProps) => {
   return (
     <div className='dakr:hover:bg-gray-900 relative rounded-xl border-1 hover:border-orange-400 dark:hover:opacity-90'>
       <NextLink
-        href={routes.posts.byId(post.id)}
+        href={routes.posts.byId(post._id)}
         className='absolute left-0 top-0 z-10 h-full w-full rounded-xl'
       />
 

@@ -38,7 +38,7 @@ export const PostControls = ({
       toast.error('you must be logged in to do that')
       return
     }
-    mutate({ postId: post.id, action })
+    mutate({ postId: post._id, action })
   }
 
   return (
@@ -65,7 +65,7 @@ export const PostControls = ({
         </Button>
       ) : (
         <Link
-          href={routes.posts.byId(post.id)}
+          href={routes.posts.byId(post._id)}
           className='flex items-center gap-2 px-3 py-1 hover:border-orange-400'
         >
           <MessageCircleIcon />
@@ -76,8 +76,8 @@ export const PostControls = ({
       {user?.id === post.author.userId && (
         <div className='ml-auto flex items-center gap-3 px-3 py-1'>
           <EditControls
-            editLink={routes.posts.edit(post.id)}
-            onDelete={() => deletePost(post.id)}
+            editLink={routes.posts.edit(post._id)}
+            onDelete={() => deletePost(post._id)}
           />
         </div>
       )}

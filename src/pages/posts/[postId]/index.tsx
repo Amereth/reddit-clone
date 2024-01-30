@@ -36,7 +36,7 @@ export default function PostPage() {
 
   const createComment = (comment: CommentFormModel) => {
     mutate({
-      postId: post.id,
+      postId: post._id,
       comment,
     })
   }
@@ -77,7 +77,7 @@ export default function PostPage() {
       )}
 
       {post.comments.map((comment) => (
-        <Comment key={comment.createdAt} comment={comment} />
+        <Comment key={comment.createdAt} postId={post._id} comment={comment} />
       ))}
     </div>
   )

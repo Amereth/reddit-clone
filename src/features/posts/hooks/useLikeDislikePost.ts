@@ -10,7 +10,7 @@ export type LikeOrDislikeAction = 'like' | 'dislike'
 
 type LikeDislikePostPayload = {
   action: LikeOrDislikeAction
-  postId: Post['id']
+  postId: Post['_id']
 }
 
 export const useLikeDislikePost = (

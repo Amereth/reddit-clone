@@ -30,7 +30,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           <ChatRoomProvider>
             <Layout>
               <Component {...pageProps} />
-              <Toaster />
+              <Toaster richColors />
             </Layout>
           </ChatRoomProvider>
           <ReactQueryDevtools initialIsOpen={false} />
