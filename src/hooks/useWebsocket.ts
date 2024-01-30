@@ -50,7 +50,6 @@ export const useWebsocket = ({
         }
 
         if (message.type === 'message') {
-          console.log('message', message)
           onMessage?.(message)
         }
       } catch (error: unknown) {
@@ -71,7 +70,6 @@ export const useWebsocket = ({
     })
 
     return () => {
-      console.log('useEffect close')
       socket.close()
     }
   }, [socket, onHistoryChange, onMessage, onError, getToken])
